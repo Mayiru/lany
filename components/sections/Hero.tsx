@@ -4,7 +4,7 @@ import React from 'react'
 import { Button } from '@/components/ui/Button'
 
 export function Hero() {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP || '573001234567'
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP || '573024270876'
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hola!%20Me%20interesa%20conocer%20más%20sobre%20sus%20productos%20personalizados.`
 
   return (

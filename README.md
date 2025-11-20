@@ -16,36 +16,41 @@ Landing page y mini-tienda moderna para la marca "Lany" especializada en arte y 
 
 ## 📋 Requisitos Previos
 
-- Node.js 18+ 
+- Node.js 18+
 - npm o yarn
 - Git
 
 ## 🛠️ Instalación
 
 1. **Clonar el repositorio** (si aplica):
+
    ```bash
    git clone <repository-url>
    cd Lany
    ```
 
 2. **Instalar dependencias**:
+
    ```bash
    npm install
    ```
 
 3. **Configurar variables de entorno**:
+
    ```bash
    cp .env.local.example .env.local
    ```
-   
+
    Edita `.env.local` y configura:
+
    ```env
    NEXT_PUBLIC_API_URL=/api
-   NEXT_PUBLIC_WHATSAPP=573001234567
+   NEXT_PUBLIC_WHATSAPP=573024270876
    NEXT_PUBLIC_SITE_URL=http://localhost:3002
    ```
 
 4. **Iniciar el servidor de desarrollo**:
+
    ```bash
    npm run dev
    ```
@@ -71,9 +76,11 @@ Para cambiar la imagen del hero, edita el componente `components/sections/Hero.t
 ### Cambiar el número de WhatsApp
 
 1. Edita el archivo `.env.local`:
+
    ```env
-   NEXT_PUBLIC_WHATSAPP=573001234567
+   NEXT_PUBLIC_WHATSAPP=573024270876
    ```
+
    (Reemplaza con tu número real, formato: código de país + número sin espacios ni símbolos)
 
 2. Reinicia el servidor de desarrollo para que los cambios surtan efecto.
@@ -100,16 +107,19 @@ Luego, agrega la imagen correspondiente en `public/images/`.
 ## 🧪 Testing
 
 Ejecuta los tests con:
+
 ```bash
 npm test
 ```
 
 Para ver la UI de tests:
+
 ```bash
 npm run test:ui
 ```
 
 Para generar un reporte de cobertura:
+
 ```bash
 npm run test:coverage
 ```
@@ -146,6 +156,7 @@ Lany/
 ### Opción 1: Despliegue desde GitHub
 
 1. **Sube tu código a GitHub**:
+
    ```bash
    git init
    git add .
@@ -174,16 +185,19 @@ Lany/
 ### Opción 2: Despliegue con Vercel CLI
 
 1. **Instala Vercel CLI**:
+
    ```bash
    npm i -g vercel
    ```
 
 2. **Inicia sesión**:
+
    ```bash
    vercel login
    ```
 
 3. **Despliega**:
+
    ```bash
    vercel
    ```
@@ -203,7 +217,9 @@ El proyecto está preparado para conectarse a un CMS como Strapi. Aquí te expli
 Tu CMS debe exponer los siguientes endpoints:
 
 #### GET `/api/products`
+
 Retorna todos los productos:
+
 ```json
 {
   "data": [
@@ -223,10 +239,13 @@ Retorna todos los productos:
 ```
 
 #### GET `/api/products?filters[slug][$eq]=camisetas-personalizadas`
+
 Retorna un producto por slug.
 
 #### POST `/api/contact-forms`
+
 Recibe formularios de contacto:
+
 ```json
 {
   "data": {
@@ -246,11 +265,11 @@ Reemplaza las funciones mock con llamadas reales a Strapi:
 export async function getProducts(): Promise<Product[]> {
   const res = await fetch(`${API_URL}/products?populate=*`, {
     headers: {
-      'Authorization': `Bearer ${process.env.STRAPI_API_TOKEN}` // Si es necesario
-    }
+      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`, // Si es necesario
+    },
   })
   const data = await res.json()
-  
+
   // Transformar datos de Strapi al formato esperado
   return data.data.map((item: any) => ({
     id: item.id.toString(),
@@ -268,6 +287,7 @@ export async function getProducts(): Promise<Product[]> {
 ### 3. Variables de entorno adicionales
 
 Agrega a `.env.local`:
+
 ```env
 NEXT_PUBLIC_API_URL=https://tu-strapi.com/api
 NEXT_PUBLIC_STRAPI_URL=https://tu-strapi.com
@@ -277,18 +297,22 @@ STRAPI_API_TOKEN=tu-token-si-es-necesario
 ## 🐛 Solución de Problemas
 
 ### Error: "Module not found"
+
 - Asegúrate de haber ejecutado `npm install`
 - Verifica que todas las dependencias estén en `package.json`
 
 ### Error: "Port 3002 already in use"
+
 - Cambia el puerto en `package.json`: `"dev": "next dev -p 3003"`
 - O mata el proceso que está usando el puerto
 
 ### Las imágenes no se muestran
+
 - Verifica que las imágenes estén en `public/images/`
 - Asegúrate de que las rutas en `lib/products.ts` coincidan con los nombres de archivo
 
 ### Tests fallan
+
 - Ejecuta `npm install` para asegurar que todas las dependencias estén instaladas
 - Verifica que `vitest.setup.ts` esté configurado correctamente
 
@@ -317,4 +341,3 @@ Los pre-commit hooks ejecutarán automáticamente lint-staged antes de cada comm
 ---
 
 **Desarrollado con ❤️ para Lany - Arte y Manualidades**
-

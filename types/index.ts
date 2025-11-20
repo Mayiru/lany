@@ -6,8 +6,11 @@ export interface Product {
   price: number
   priceRange?: string
   image: string
+  images?: string[] // Galería de imágenes adicionales
   category: string
   featured?: boolean
+  sizes?: string[] // Tallas disponibles (ej: ['S', 'M', 'L', 'XL'])
+  colors?: string[] // Colores disponibles
 }
 
 export interface ContactPayload {
@@ -22,4 +25,3 @@ export interface ApiResponse<T> {
   error?: string
   ok: boolean
 }
-

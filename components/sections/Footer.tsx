@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { SocialLinks } from '@/components/ui/SocialLinks'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -18,16 +19,19 @@ export function Footer() {
               <Image
                 src="/images/logo.png"
                 alt="Lany - Arte y Manualidades"
-                width={50}
-                height={50}
+                width={60}
+                height={60}
                 className="object-contain"
               />
-              <span className="text-xl font-bold text-white">Lany</span>
             </Link>
-            <p className="text-sm">
+            <p className="text-sm mb-4">
               Arte y Manualidades personalizadas para hacer tus momentos
               especiales únicos.
             </p>
+            <div>
+              <p className="text-sm text-gray-400 mb-2">Síguenos en:</p>
+              <SocialLinks iconSize="md" variant="dark" />
+            </div>
           </div>
 
           {/* Links Section */}
@@ -72,15 +76,19 @@ export function Footer() {
           {/* Contact Section */}
           <div>
             <h3 className="text-white font-semibold mb-4">Contacto</h3>
-            <p className="text-sm mb-2">
+            <p className="text-sm mb-4">
               ¿Tienes alguna pregunta o quieres un producto personalizado?
             </p>
             <Link
               href="/contact"
-              className="inline-block mt-4 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="inline-block mb-4 px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               Contáctanos
             </Link>
+            <div>
+              <p className="text-sm text-gray-400 mb-2">Redes sociales:</p>
+              <SocialLinks iconSize="md" variant="dark" />
+            </div>
           </div>
         </div>
 
@@ -94,4 +102,3 @@ export function Footer() {
     </footer>
   )
 }
-

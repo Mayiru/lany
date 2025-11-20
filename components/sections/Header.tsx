@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { SocialLinks } from '@/components/ui/SocialLinks'
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -29,27 +30,29 @@ export function Header() {
             <Image
               src="/images/logo.png"
               alt="Lany - Arte y Manualidades"
-              width={60}
-              height={60}
+              width={70}
+              height={70}
               className="object-contain"
               priority
             />
-            <span className="text-xl font-bold text-primary-700">Lany</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center space-x-6">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-gray-700 hover:text-primary-600 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2 py-1"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="hidden md:flex items-center space-x-6">
+            <ul className="flex items-center space-x-6">
+              {navLinks.map(link => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-gray-700 hover:text-primary-600 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 rounded px-2 py-1"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <SocialLinks iconSize="md" />
+          </div>
 
           {/* Mobile Menu Button */}
           <button
@@ -85,22 +88,27 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <ul className="md:hidden mt-4 space-y-2 pb-4">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="block px-4 py-2 text-gray-700 hover:bg-primary-50 hover:text-primary-600 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="md:hidden mt-4 space-y-4 pb-4">
+            <ul className="space-y-2">
+              {navLinks.map(link => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="block px-4 py-2 text-gray-700 hover:bg-primary-50 hover:text-primary-600 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="px-4 pt-2 border-t border-gray-200">
+              <p className="text-sm text-gray-600 mb-2">Síguenos en:</p>
+              <SocialLinks iconSize="md" />
+            </div>
+          </div>
         )}
       </nav>
     </header>
   )
 }
-

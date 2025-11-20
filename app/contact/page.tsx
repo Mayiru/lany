@@ -8,16 +8,14 @@ export const metadata: Metadata = {
 }
 
 export default function ContactPage() {
-  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP || '573001234567'
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP || '573024270876'
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=Hola!%20Me%20gustaría%20hacer%20una%20consulta.`
 
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Contáctanos
-          </h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Contáctanos</h1>
           <p className="text-lg text-gray-700 mb-8">
             ¿Tienes alguna pregunta o quieres un producto personalizado? Estamos
             aquí para ayudarte.
@@ -69,4 +67,3 @@ export default function ContactPage() {
     </div>
   )
 }
-

@@ -1,16 +1,36 @@
 import { Product, ContactPayload, ApiResponse } from '@/types'
+import { mockProducts } from './products'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || '/api'
 
+// Helper para construir URL absoluta cuando es necesario (Server Components)
+function getApiUrl(path: string): string {
+  if (API_URL.startsWith('http')) {
+    return `${API_URL}${path}`
+  }
+  // En el servidor, necesitamos URL absoluta
+  if (typeof window === 'undefined') {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3002'
+    return `${baseUrl}${API_URL}${path}`
+  }
+  // En el cliente, URL relativa funciona
+  return `${API_URL}${path}`
+}
+
 /**
  * Obtiene todos los productos
- * 
+ *
  * TODO: Cuando conectes un CMS (ej: Strapi), reemplaza esta función para hacer:
  * const res = await fetch(`${API_URL}/products?populate=*`)
  * return res.json()
  */
 export async function getProducts(): Promise<Product[]> {
-  const res = await fetch(`${API_URL}/products`, {
+  // Si estamos usando mocks y estamos en el servidor, retornar directamente
+  if (API_URL === '/api' && typeof window === 'undefined') {
+    return mockProducts
+  }
+
+  const res = await fetch(getApiUrl('/products'), {
     cache: 'no-store',
   })
   if (!res.ok) {
@@ -22,13 +42,18 @@ export async function getProducts(): Promise<Product[]> {
 
 /**
  * Obtiene un producto por su slug
- * 
+ *
  * TODO: Cuando conectes un CMS, reemplaza para hacer:
  * const res = await fetch(`${API_URL}/products?filters[slug][$eq]=${slug}&populate=*`)
  * return res.json()
  */
 export async function getProductBySlug(slug: string): Promise<Product | null> {
-  const res = await fetch(`${API_URL}/products?slug=${slug}`, {
+  // Si estamos usando mocks y estamos en el servidor, retornar directamente
+  if (API_URL === '/api' && typeof window === 'undefined') {
+    return mockProducts.find(p => p.slug === slug) || null
+  }
+
+  const res = await fetch(getApiUrl(`/products?slug=${slug}`), {
     cache: 'no-store',
   })
   if (!res.ok) {
@@ -40,13 +65,18 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
 
 /**
  * Obtiene un producto por su ID
- * 
+ *
  * TODO: Cuando conectes un CMS, reemplaza para hacer:
  * const res = await fetch(`${API_URL}/products/${id}?populate=*`)
  * return res.json()
  */
 export async function getProductById(id: string): Promise<Product | null> {
-  const res = await fetch(`${API_URL}/products/${id}`, {
+  // Si estamos usando mocks y estamos en el servidor, retornar directamente
+  if (API_URL === '/api' && typeof window === 'undefined') {
+    return mockProducts.find(p => p.id === id) || null
+  }
+
+  const res = await fetch(getApiUrl(`/products/${id}`), {
     cache: 'no-store',
   })
   if (!res.ok) {
@@ -58,7 +88,7 @@ export async function getProductById(id: string): Promise<Product | null> {
 
 /**
  * Envía un formulario de contacto
- * 
+ *
  * TODO: Cuando conectes un CMS, reemplaza para hacer:
  * const res = await fetch(`${API_URL}/contact-forms`, {
  *   method: 'POST',
@@ -70,7 +100,7 @@ export async function getProductById(id: string): Promise<Product | null> {
 export async function submitContact(
   payload: ContactPayload
 ): Promise<ApiResponse<{ message: string }>> {
-  const res = await fetch(`${API_URL}/contact`, {
+  const res = await fetch(getApiUrl('/contact'), {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -91,4 +121,3 @@ export async function submitContact(
     data: { message: data.message || 'Mensaje enviado correctamente' },
   }
 }
-

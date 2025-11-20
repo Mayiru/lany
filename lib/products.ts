@@ -6,11 +6,19 @@ export const mockProducts: Product[] = [
     id: '1',
     slug: 'camisetas-personalizadas',
     name: 'Camisetas personalizadas',
-    description: 'Camisetas personalizadas en tallas S, M, L, XL',
+    description:
+      'Camisetas personalizadas de alta calidad, perfectas para eventos, celebraciones o uso diario. Disponibles en múltiples tallas y colores para que encuentres la combinación perfecta.',
     price: 35000,
     image: '/images/Camisetas.png',
+    images: [
+      '/images/Camisetas.png',
+      '/images/Camisetas.png',
+      '/images/Camisetas.png',
+    ],
     category: 'Ropa',
     featured: true,
+    sizes: ['S', 'M', 'L', 'XL'],
+    colors: ['Rojo', 'Morado', 'Verde', 'Blanco', 'Naranja', 'Beige'],
   },
   {
     id: '2',
@@ -136,4 +144,3 @@ export const mockProducts: Product[] = [
     category: 'Accesorios',
   },
 ]
-
