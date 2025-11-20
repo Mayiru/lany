@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { mockProducts } from '@/lib/products'
-import { Product } from '@/types'
 
 export async function GET(request: NextRequest) {
   try {
@@ -9,7 +8,7 @@ export async function GET(request: NextRequest) {
     const id = searchParams.get('id')
 
     if (slug) {
-      const product = mockProducts.find((p) => p.slug === slug)
+      const product = mockProducts.find(p => p.slug === slug)
       if (!product) {
         return NextResponse.json(
           { error: 'Product not found' },
@@ -20,7 +19,7 @@ export async function GET(request: NextRequest) {
     }
 
     if (id) {
-      const product = mockProducts.find((p) => p.id === id)
+      const product = mockProducts.find(p => p.id === id)
       if (!product) {
         return NextResponse.json(
           { error: 'Product not found' },
@@ -38,4 +37,3 @@ export async function GET(request: NextRequest) {
     )
   }
 }
-

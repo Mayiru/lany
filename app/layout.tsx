@@ -25,6 +25,9 @@ export const metadata: Metadata = {
     'decoración personalizada',
   ],
   authors: [{ name: 'Lany' }],
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3002'
+  ),
   openGraph: {
     type: 'website',
     locale: 'es_CO',
@@ -94,4 +97,3 @@ export default function RootLayout({
     </html>
   )
 }
-

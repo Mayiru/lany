@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { POST } from '../contact/route'
 import { NextRequest } from 'next/server'
 
@@ -71,4 +71,3 @@ describe('POST /api/contact', () => {
     expect(data.error).toBeDefined()
   })
 })
-

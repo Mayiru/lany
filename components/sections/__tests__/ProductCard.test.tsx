@@ -22,7 +22,8 @@ describe('ProductCard', () => {
 
   it('renders price correctly', () => {
     render(<ProductCard product={mockProduct} />)
-    expect(screen.getByText(/COP/)).toBeInTheDocument()
+    // El precio se formatea como "$ 10.000" en formato colombiano
+    expect(screen.getByText(/\$\s*10\.000/)).toBeInTheDocument()
   })
 
   it('has proper accessibility attributes', () => {
@@ -31,4 +32,3 @@ describe('ProductCard', () => {
     expect(link).toBeInTheDocument()
   })
 })
-
